@@ -114,15 +114,15 @@ body {
 }
 
 body.dark {
-    --bg-color: hsl(0, 2%, 24%);
+    --bg-color: hsl(0, 1%, 35%);
     /* color para las targetas*/
-    --card-color: hsl(240, 18%, 32%);
+    --card-color: hsl(240, 14%, 37%);
     /* color para las imagenes de las targetas*/
     background-color: hwb(0 13% 87%);
     --text-color: hsl(0, 16%, 75%);
     --title-color: hsl(0, 5%, 72%);
 
-    --cart-body: hsl(300, 43%, 19%);
+    --cart-body: hsl(300, 19%, 34%);
     --cart-header: hsl(0, 33%, 28%);
 
     --product-color: hsl(286, 4%, 97%);

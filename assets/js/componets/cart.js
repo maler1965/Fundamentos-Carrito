@@ -3,7 +3,11 @@
 
 
 function cart(db, printProducts) { //esta recibiendo estos parametros del archivo main.js
-    let cart = []  // hara la funcion de base de datos, para despues poder seleccionar solo el id y la cantidad disponible, para indicar al usuario
+
+    const ls = window.localStorage
+    //ls.removeItem('cartBD')
+
+    let cart = JSON.parse(ls.getItem('cartBD')) || []  // hara la funcion de base de datos, para despues poder seleccionar solo el id y la cantidad disponible, para indicar al usuario
 
     const productsDom = document.querySelector('.products__container')
     const notifyDom = document.querySelector('.notify')
@@ -25,7 +29,11 @@ function cart(db, printProducts) { //esta recibiendo estos parametros del archiv
             </div>
             `
             notifyDom.classList.remove('show--notify')
+            ls.removeItem('cartBD')
+
         } else {
+
+
             for (const item of cart) {
                 const product = db.find(p => p.id === item.id) //saca un producto entero de la base de datos, pero si una de sus claves coincide con la que tenemos, el id  
                 htmlCart += `
@@ -62,9 +70,20 @@ function cart(db, printProducts) { //esta recibiendo estos parametros del archiv
                 `
             }
 
+
+            // let cambia = cart
+            //cambia = JSON.parse(ls.getItem('cartBD'))
+            ls.setItem('cartBD', JSON.stringify(cart)) //guarda una clave en localstore y espera un valor de cart
+
+
             notifyDom.classList.add('show--notify')
         }
+        //let cambia = JSON.parse(ls.getItem('cartBD'))
+
+
+
         cartDom.innerHTML = htmlCart
+
         notifyDom.innerHTML = showItemsCount()
         countDom.innerHTML = showItemsCount()
         totalDom.innerHTML = showTotal()
@@ -147,6 +166,7 @@ function cart(db, printProducts) { //esta recibiendo estos parametros del archiv
         }
 
         cart = []
+        ls.removeItem('cartBD')
         printCart()
         printProducts()
         window.alert('Gracias por su compra')

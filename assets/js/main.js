@@ -23,19 +23,30 @@ cart(db, printProducts)
 
 //Dark mode
 const themeButton = document.getElementById('theme')
+const icon = themeButton.firstElementChild
 
-//const ls = window localStorage
+const ls = window.localStorage
 
-//const theme = ls.getItem('theme')
+const theme = ls.getItem('theme')
+
+if (theme === 'dark') {
+    document.body.classList.add('dark')
+    icon.classList.remove('bxs-moon')
+    icon.classList.add('bxs-sun')
+} else {
+    document.body.classList.remove('dark')
+    icon.classList.remove('bxs-sun')
+    icon.classList.add('bxs-moon')
+}
 
 themeButton.addEventListener('click', function () {
     //window.alert('click Pedro')
     document.body.classList.toggle('dark')//con toggle() se anade una clase que uno desee, y si ya existe lo quita
 
     if (document.body.classList.contains('dark')) {
-        localStorage.setItem('theme', 'dark')
+        ls.setItem('theme', 'dark')
     } else {
-        localStorage.removeItem('theme')
+        ls.removeItem('theme')
     }
 
 
