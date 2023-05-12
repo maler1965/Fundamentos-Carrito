@@ -1,0 +1,755 @@
+:root {
+    /* Seudo clase root,  para que todo lo que hagamos dentro de esto tendra el alcanze global para todas nuestras variables*/
+
+    /*  VARIABLES  */
+
+    --header-height: 60px;
+    /* para definir el tamayo del header*/
+    --primary-color: hsl(354, 78%, 60%);
+    --body-color: hsl(286, 4%, 97%);
+    --text-color: hsl(0, 0%, 20%);
+    --title-color: hsl(0, 0%, 10%);
+    --bg-color: hsl(0, 0%, 100%);
+    --cart-body: hsl(0, 0%, 95%);
+    --cart-header: hsl(0, 0%, 95%);
+    /* color para las targetas*/
+    --card-color: hsl(0, 0%, 98%);
+    /* color para las imagenes de las targetas*/
+
+    --product-color: hsl(286, 4%, 97%);
+    /*--product-color: hsl(0, 0%, 4%);*/
+    --carrito-color: hsl(0, 0%, 100%);
+
+    --body-font: 'Open Sans', sans-serif;
+    /* tipo de letra para todo el cuerpo, ir a la pagina de google font para seleccionar, copiar y pegar  en CSS familia*/
+    --title-font: 'Poppins', sans-serif;
+
+    --big-font: 2rem;
+    /* diferentes tamayos de titulos*/
+    --medium-font: 1.5rem;
+    --normal-font: 1rem;
+    --small-font: .8rem;
+    --tiny-font: .75rem;
+
+    --font-bold: 700;
+    /* crear diferentes grosores*/
+    --font-medium: 600;
+    --font-normal: 400;
+    --font-tiny: 300;
+
+    --sp-0-5: .5rem;
+    /*--sp-8-5*/
+    /* para los espacios  */
+    --sp-0-75: .75rem;
+    --sp-1: 1rem;
+    --sp-1-5: 1.5rem;
+    --sp-2: 2rem;
+    --sp-2-5: 2.5rem;
+    --sp-3: 3rem;
+
+    --z-fixed: 100;
+    /* para los datas para que queden sobre lo demas*/
+    --z-modal: 200;
+
+}
+
+@media (min-width: 992px) {
+
+    /* para cuando se use diferentes tipos de dispositivos*/
+    :root {
+        --big-font: 2.5rem;
+        /* diferentes tamayos de titulos*/
+        --medium-font: 2rem;
+        --normal-font: 1.25rem;
+        --small-font: 1rem;
+        --tiny-font: .8rem;
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+
+
+
+html {
+    /* darles estilos */
+    font-size: 16px;
+    line-height: 1.5;
+    /* entre lineado,  esto no lleva pixeles*/
+    scroll-behavior: smooth;
+    /* para una transicion suabe a otro enlace*/
+    box-sizing: border-box;
+    /* modelo de caja alternativo, para trabajar mas facilmente con  las cajas*/
+}
+
+*,
+*::before,
+*::after {
+    /* para eliminar los estilos ocultos que vienen por defecto y hacer que usen la configuracion que hemos puesto*/
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+/* ================================== */
+button,
+/* tambien tenemos que resetear estas caracteristicas para que use las que queremos*/
+input,
+textarea {
+    font-family: var(--body-font);
+    font-size: var(--normal-font);
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font);
+    font-weight: var(--font-normal);
+    /*color: hsl(0, 0%, 100%);
+    var(--text-color);*/
+
+    /*background-color: hwb(0 13% 87%);
+    var(--body-color);*/
+}
+
+body.dark {
+    --bg-color: hsl(0, 2%, 24%);
+    /* color para las targetas*/
+    --card-color: hsl(240, 18%, 32%);
+    /* color para las imagenes de las targetas*/
+    background-color: hwb(0 13% 87%);
+    --text-color: hsl(0, 16%, 75%);
+    --title-color: hsl(0, 5%, 72%);
+
+    --cart-body: hsl(300, 43%, 19%);
+    --cart-header: hsl(0, 33%, 28%);
+
+    --product-color: hsl(286, 4%, 97%);
+}
+
+
+a {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--title-font);
+    font-weight: var(--font-medium);
+    color: var(--title-color);
+}
+
+ul,
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    /* resetear para que las imagenes no se apliquen segun el tamayo que tienen, pues si son mas grandes se desbordaran*/
+    height: auto;
+}
+
+button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    user-select: none;
+    /* para que no puedan seleccionar ningun texto de la pagina*/
+    cursor: pointer;
+    /*para que el puntero cambie de forma para indicar que el texto es selectivo*/
+}
+
+/* Global*/
+.section {
+    padding: var(--sp-2) 0 var(--sp-1);
+}
+
+.section--title,
+.container {
+    max-width: 1024px;
+    margin: 0 1rem;
+    /* para que se despegue un poco del extremo*/
+}
+
+
+/*====================================*/
+
+/* loader*/
+.loader {
+    position: fixed;
+    /*para que no se mueva*/
+    top: 0;
+    /* para que comienze desde arriba*/
+    left: 0;
+    /* para que comienze desde la izquierda*/
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: var(--z-modal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.loader__container span {
+    display: inline-block;
+    width: var(--sp-3);
+    height: var(--sp-3);
+    background-color: var(--primary-color);
+    border-radius: 58%;
+    animation: pulse 1.0s infinite ease-in-out;
+}
+
+.loader--hidden {
+    /* una clase para cuando el windows se carge por completo, se ocultara el indicador de carga */
+    opacity: 0;
+    visibility: hidden;
+    transition: all .5s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
+/* Header ====================================================================*/
+.header {
+    position: fixed;
+    bottom: 0;
+    /* para que el header este en la parte de abajo*/
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    z-index: var(--z-fixed);
+    box-shadow: 0 0 10px hsla(0, 0%, 0%, 10%);
+}
+
+.nav {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* para el tamayo y aspecto del icono */
+/*=================*/
+.nav__logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo--icon {
+    width: 3rem;
+    height: 3rem;
+    color: var(--primary-color);
+}
+
+/*===============================================*/
+
+@media (max-width: 768px) {
+    .nav__menu {
+        position: fixed;
+        bottom: -100%;
+        /*var(--header-height);*/
+        /* para que el menu se desplase hacia arriba*/
+        left: 0%;
+        /* 0, para que comienze desde la izquierda,  y -100 es para que se oculte y poder sacarlo con javascript*/
+        width: 100%;
+        /* para que ocupe todo el ancho*/
+        height: calc(max-content - var(--header-height));
+        /* para que suba segun vaya teniendo contenido, que se ajuste al contenido*/
+        padding: var(--sp-3) var(--sp-1);
+        /* el relleno de arriba del header sera mas grande que el de abajo*/
+        background-color: var(--bg-color);
+        z-index: var(--z-fixed);
+        transition: bottom .3s ease-in-out;
+        /*la transicion es aplicada al bottom de arriba*/
+    }
+
+
+}
+
+.nav__menu .btn--close {
+    /*  para el boton de cierre con la X*/
+    position: absolute;
+    top: var(--sp-0-75);
+    right: var(--sp-0-75);
+    width: var(--sp-2);
+    height: var(--sp-2);
+    font-size: var(--medium-font);
+    z-index: var(--z-fixed);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*border: 1px solid;*/
+
+}
+
+.nav__link {
+    /* para que se muestre que se ha seleccionado el menu, es decir al pasar el puntero se convertira en una mano*/
+    display: flex;
+    align-items: center;
+    padding: var(--sp-0-75) var(--sp-1);
+    color: var(--text-color);
+    transition: color .3s ease-in-out;
+}
+
+.nav__link:hover {
+    /* para que se cambie el color al poner el puntero encima*/
+    color: var(--primary-color);
+}
+
+
+.nav__buttons {
+    /*para que los botones esten ceparados entre si*/
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+}
+
+.nav__btn i {
+    /* para el tamayo del icono*/
+    font-size: 1.25rem;
+    background-color: var(--product-color);
+    border-radius: 10%;
+}
+
+.btn--cart {
+    position: relative;
+}
+
+.notify {
+    /*para la notificacion del carrito*/
+    position: absolute;
+    top: -5px;
+    right: -11px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-color);
+    font-size: var(--tiny-font);
+    color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+}
+
+.show--notify {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* show Menu       es decir para que aparesca el menu al cambiarlo por medio de javascript*/
+.show--menu {
+    /* estaba oculto con -100% y al ponerlo en var(--header-height), aparecera desde abajo*/
+    bottom: var(--header-height);
+}
+
+/* estilos a la parte del main donde aparece los productos
+=======================================================*/
+/*v*/
+.products__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--sp-2);
+}
+
+
+
+
+/*v*/
+.product__title {
+    margin-bottom: var(--sp-2);
+}
+
+
+.product {
+    overflow: hidden;
+    /* para que lo que cargemos no se desborde del contenedor*/
+}
+
+.product__image {
+    /*para que se haga un poco pequeno por un momento*/
+    padding: var(--sp-1);
+    background-color: var(--card-color);
+}
+
+.product__image img {
+    transition: transform .3s ease-in-out;
+}
+
+
+.product:hover img {
+    /* para que la imagen se mueva un poco cuando se acerca el puntero*/
+    transform: translate(-10px);
+}
+
+/* estilos para las descripciones del producto
+=================================*/
+
+.product__content {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: var(--sp-1-5);
+    min-height: 109px;
+}
+
+.product__btn {
+    /* estilo para el icono del carrito que esta en cada imagen del producto*/
+    position: absolute;
+    top: 0;
+    right: var(--sp-1-5);
+    width: 45px;
+    height: 45px;
+    background-color: var(--carrito-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    /* para que el icono tenga marco redondo*/
+    transform: translateY(-50%);
+    /* para que el icono quede en medio de la union entre la imagen y la descripcion, 50% en una parte y la otra en la otra parte*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    transition: background-color .3s ease-in-out;
+    /* cambia el color al pasar el puntero*/
+}
+
+.product__btn:hover {
+    /*v*/
+    /* conectado con la caracteristica que se puso arriba, en transition */
+    background-color: var(--primary-color);
+    color: var(--carrito-color);
+}
+
+/*v*/
+.product__price {
+    /* para ubicar los precios y las palabras de stock en su debido sitio*/
+    grid-column: span 1;
+
+
+}
+
+/*v*/
+.product__stock {
+    grid-column: span 2;
+    background-color: var(--product-color);
+    border-radius: 10%;
+    justify-self: flex-end;
+    font-size: var(--small-font);
+    /*para hacer mas pequeno todos los productos*/
+}
+
+/*v*/
+.product__title {
+    grid-column: span 3;
+}
+
+
+/*estilos para el footer =================*/
+/*v*/
+.footer {
+    background-color: var(--card-color);
+}
+
+
+.footer__container,
+.footer__top {
+    /*v*/
+    /*separa los contenedores en el footer*/
+    display: grid;
+    row-gap: var(--sp-1-5);
+}
+
+.footer__title {
+    /*v*/
+    margin-bottom: var(--sp-0-75);
+    /*para separar el titulo de la descripcion*/
+}
+
+.footer__social {
+    /*v*/
+    /* para poner en linea los iconos de las redes sociales*/
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1-5);
+}
+
+/*v*/
+.footer__link {
+    /* para dar estilos al contenedor de los iconos de las redes sociales*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--sp-2-5);
+    height: var(--sp-2-5);
+    color: var(--bg-color);
+    background-color: var(--title-color);
+    border-radius: 50%;
+    font-size: var(--sp-1-5);
+    transition: background-color .3s ease-in-out;
+}
+
+/*v*/
+.footer__link:hover {
+    background-color: var(--primary-color);
+    /* como tiene transition en la parte de arriba, se pone esto aqui*/
+}
+
+/*v*/
+.footer__bottom {
+    text-align: center;
+}
+
+/*  estilos del contenedor de la seccion Carrito
+===============*/
+.cart {
+    /*v*/
+    position: fixed;
+    bottom: var(--header-height);
+    right: -100%;
+    max-width: 375px;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    /*calcula el alto del dispositivo y se ajusta*/
+    background-color: var(--bg-color);
+    z-index: var(--z-fixed);
+    transition: right .5s ease-in-out;
+}
+
+/*para controlar la aparicion del carrito*/
+/*v*/
+.show--cart {
+    right: 0;
+    /*con cero aparece  a la derecha, con -100 se oculta*/
+}
+
+/*v*/
+.cart__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 70% 20%;
+    height: 100%;
+}
+
+/*v*/
+.cart__header {
+    display: grid;
+    grid-template-columns: 2fr 2fr .5fr;
+    align-items: center;
+    width: 100%;
+    padding: var(--sp-1-5) 0 0 var(--sp-1);
+    background-color: var(--cart-header);
+}
+
+/*v*/
+.cart__title {
+    grid-column: span 2;
+}
+
+/*v*/
+.cart__btn.btn--close {
+    font-size: var(--medium-font);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart__body {
+    /*v*/
+    padding: var(--sp-1);
+    background-color: var(--cart-body);
+
+    overflow-y: auto;
+    /* para que a medida que se agrege productos al carrito se desplase como un menu desplegable*/
+}
+
+.cart__emply {
+    /*v*/
+    /*para cuando no hay nada en el carrito*/
+    display: flex;
+    align-items: center;
+    gap: var(--sp-0-5);
+    font-size: var(--normal-font);
+}
+
+.article {
+    /*v*/
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    /*para hacer mas pequeno la imagen*/
+    grid-template-rows: 1fr;
+    column-gap: var(--sp-1);
+    /*para separar la imagen de la descripcion*/
+    margin-bottom: var(--sp-1);
+    /*para separar cada articulo con los otros articulos*/
+
+}
+
+.article__image {
+    /*v*/
+    /* esto es solo estilo al contenido o contenedor, no a la imagen en si.*/
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    /*para que no se desborde la imagen*/
+    border: 1px solid var(--card-color);
+    align-items: center;
+    /*para centrar la imagen*/
+
+}
+
+/*v*/
+.article__image img {
+    /*para dar estilo a la imagen en si*/
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+/*v*/
+.article__content {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 30px;
+}
+
+/*v*/
+.article__title {
+    /* para el titulo h3*/
+    grid-column: span 4;
+}
+
+/*v*/
+.article__quantity {
+    /*para dar estilo a los botonsitos de aumentar o disminuir la cantidad de articulos para el carrito*/
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    justify-self: center;
+
+}
+
+/*v*/
+.remove-from-cart {
+    /*para el icono del basurero*/
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-self: flex-end;
+}
+
+.cart__footer {
+    /*v*/
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
+    background-color: var(--card-color);
+    padding: var(--sp-1);
+    row-gap: var(--sp-1);
+
+}
+
+/*v*/
+.cart__count {
+    grid-column: span 2;
+    font-size: var(--small-font);
+}
+
+/*v*/
+.cart__total {
+    grid-column: span 2;
+    justify-self: flex-end;
+}
+
+/*v*/
+.btn--buy {
+    grid-column: span 4;
+    background-color: var(--title-color);
+    color: var(--bg-color);
+    padding: var(--sp-1);
+}
+
+/*para adactarse a diferentes tamanos de pantalla*/
+
+@media (min-width: 768px) {
+
+    /*v*/
+    :root {
+        --header-heigth: 75px;
+        /*para el alto del contenedor de los menus*/
+    }
+
+    .header {
+        /*v*/
+        top: 0;
+        bottom: unset;
+        /* para decirle que no lo aplique aun*/
+    }
+
+    .nav__list {
+        /*v*/
+        display: flex;
+        align-items: center;
+    }
+
+    /*v*/
+    /*para que no aparezca los botones*/
+    .nav__menu .btn--close,
+    .btn--menu {
+        display: none;
+    }
+
+    /*v*/
+    .main {
+        /* para que se separe de la parte de arriba*/
+        padding-top: var(--header-height);
+    }
+
+    .product__title {
+        font-size: var(--small-font);
+        /* para el tamano del texto que describe el producto*/
+    }
+
+    .cart {
+        top: var(--header-height);
+    }
+
+
+}
+
+
+@media (min-width: 1024px) {
+
+    .section--title,
+    .container {
+        margin: 0 auto;
+    }
+
+
+
+}

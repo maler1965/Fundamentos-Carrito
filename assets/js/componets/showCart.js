@@ -1,0 +1,19 @@
+
+function showCart() {
+    const btnCart = document.querySelector('.btn--cart');
+    const cart = document.querySelector('.cart');
+
+    btnCart.addEventListener('click', function () {
+        cart.classList.toggle('show--cart');
+    })
+
+    cart.addEventListener('click', function (e) {
+        if (e.target.closest('.btn--close')) {
+            cart.classList.remove('show--cart');
+        }
+    })
+}
+
+
+// ahora se deja listo para exportar y que alguien lo reciba
+export default showCart;
