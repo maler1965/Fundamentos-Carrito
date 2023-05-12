@@ -24,10 +24,12 @@ cart(db, printProducts)
 //Dark mode
 const themeButton = document.getElementById('theme')
 
-console.log(themeButton)
+//const ls = window localStorage
+
+//const theme = ls.getItem('theme')
 
 themeButton.addEventListener('click', function () {
-    window.alert('click')
+    //window.alert('click Pedro')
     document.body.classList.toggle('dark')//con toggle() se anade una clase que uno desee, y si ya existe lo quita
 
     if (document.body.classList.contains('dark')) {
