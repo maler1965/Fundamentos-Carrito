@@ -45,8 +45,12 @@ themeButton.addEventListener('click', function () {
 
     if (document.body.classList.contains('dark')) {
         ls.setItem('theme', 'dark')
+        icon.classList.remove('bxs-moon')
+        icon.classList.add('bxs-sun')
     } else {
         ls.removeItem('theme')
+        icon.classList.remove('bxs-sun')
+        icon.classList.add('bxs-moon')
     }
 
 
